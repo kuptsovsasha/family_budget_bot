@@ -87,7 +87,7 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     if not has_income:
         report += "• Нема доходів за вибраний період\n"
 
-    report += f"\nЗагальні витрати: {total_income:.2f}\n\n"
+    report += f"\nЗагальні доходи: {total_income:.2f}\n\n"
 
     # Process expenses
     report += "💸 Витрати:\n"
