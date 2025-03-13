@@ -178,7 +178,7 @@ class DBHandler:
                 conn.close()
 
     @staticmethod
-    def get_transactions(start_date, end_date):
+    def get_transactions(user_id, start_date, end_date):
         """Get all transactions in a date range for a user"""
         conn = None
         cursor = None
@@ -194,11 +194,11 @@ class DBHandler:
             SELECT t.id, t.amount, t.description, t.date, c.name as category, c.type
             FROM transactions t
             JOIN categories c ON t.category_id = c.id
-            WHERE t.date BETWEEN ? AND ?
+            WHERE t.user_id = ? AND t.date BETWEEN ? AND ?
             ORDER BY t.date DESC
             """
 
-            cursor.execute(query, (start_str, end_str))
+            cursor.execute(query, (user_id, start_str, end_str))
             transactions = cursor.fetchall()
 
             return transactions

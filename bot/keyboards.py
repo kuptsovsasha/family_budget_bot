@@ -66,6 +66,7 @@ class Keyboards:
             [InlineKeyboardButton("Сьогодні", callback_data="report_today")],
             [InlineKeyboardButton("Цей тиждень", callback_data="report_week")],
             [InlineKeyboardButton("Цей місяць", callback_data="report_month")],
+            [InlineKeyboardButton("Свій період", callback_data="report_custom")],
             [InlineKeyboardButton("Назад", callback_data="back_to_main")]
         ]
         return InlineKeyboardMarkup(keyboard)
@@ -76,5 +77,13 @@ class Keyboards:
         keyboard = [
             [InlineKeyboardButton("Назад до звітів", callback_data="reports")],
             [InlineKeyboardButton("Головне меню", callback_data="back_to_main")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
+
+    @staticmethod
+    def date_cancel_keyboard():
+        """Create a keyboard with just a cancel button"""
+        keyboard = [
+            [InlineKeyboardButton("Скасувати", callback_data="cancel_date")]
         ]
         return InlineKeyboardMarkup(keyboard)

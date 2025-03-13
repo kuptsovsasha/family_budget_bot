@@ -8,8 +8,23 @@ from bot.handlers.transaction_handler import (
     handle_confirmation,
     handle_description
 )
-from .handlers.report_handler import show_report_options, generate_report
-from config import MAIN_MENU, SELECT_CATEGORY, ENTER_AMOUNT, ADD_RECORD, CONFIRM_RECORD, GENERATE_REPORT
+from .handlers.report_handler import (
+    show_report_options,
+    generate_report,
+    handle_custom_date_start,
+    handle_custom_date_end,
+    cancel_date_selection
+)
+from config import (
+    MAIN_MENU,
+    SELECT_CATEGORY,
+    ENTER_AMOUNT,
+    ADD_RECORD,
+    CONFIRM_RECORD,
+    GENERATE_REPORT,
+    CUSTOM_DATE_START,
+    CUSTOM_DATE_END
+)
 
 
 def setup_conversation_handler():
@@ -39,6 +54,14 @@ def setup_conversation_handler():
             ],
             GENERATE_REPORT: [
                 CallbackQueryHandler(generate_report)
+            ],
+            CUSTOM_DATE_START: [
+                CallbackQueryHandler(cancel_date_selection, pattern="^cancel_date$"),
+                MessageHandler(filters.TEXT & ~filters.COMMAND, handle_custom_date_start)
+            ],
+            CUSTOM_DATE_END: [
+                CallbackQueryHandler(cancel_date_selection, pattern="^cancel_date$"),
+                MessageHandler(filters.TEXT & ~filters.COMMAND, handle_custom_date_end)
             ],
         },
         fallbacks=[
